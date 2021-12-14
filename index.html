@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+    <!-- css -->
+    <link rel="stylesheet" type="text/css" href="../web_dev/styles.css">
+    <!-- google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Readex+Pro&display=swap" rel="stylesheet">
+    <!-- font awesome -->
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0px;
+            margin: 0px;
+            box-sizing: border-box;
+        }
+        .fa-street-view{
+            color: white;
+            font-size: 3rem;
+        }
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100vw;
+            height: 100vh;
+            font-family: 'Readex Pro', sans-serif;
+        }
+        .main-div{
+            background-color: #77b5fe;
+            height: 60vh;
+            width: 20vw;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border-radius: 3%;
+        }
+        .weather{
+            font-size: 4rem;
+            margin-top: 1rem;
+            text-align: center;
+            color: yellow;
+            align-self: start;
+            width: 100%;
+            height: 30vh;
+            transform: translate(1rem,0px);
+            transform: scale(1.4,1.4);
+        }
+        .info{
+            text-align: center;
+        }
+        .info{
+            font-size: 3rem;
+        }
+        .min-temp,.max-temp,.date{
+            font-size: 1rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="main-div">
+        <div class="weather">
+            <i class="fas fa-sun"></i>
+        </div>
+        <div class="info">
+            <h2><i class="fas fa-street-view"></i>{%city%},{%country%}</h2>
+            <p class="date">WED|OCT 29|2001</p>
+            <h2 class="temperature">{%temp%}&deg;C</h2>
+            <p><span class="min-temp">Min {%mintemp%}&deg;C|</span><span class="max-temp">Max {%maxtemp%}&deg;C</span></p>
+        </div>
+    </div>
+
+  <script> 
+    let tempstat= '{%tempstatus%}';
+    if(tempstat=='Clouds')
+    {
+        document.querySelector('.weather').innerHTML='<i class="fas fa-cloud"></i>';
+        document.querySelector('.weather').style.color='grey';
+    }
+    else if(tempstat=='Sunny')
+    {
+        document.querySelector('.weather').innerHTML='<i class="fas fa-sun"></i>';
+        console.log('sunny');
+    }
+    let date=new Date();
+
+    let day=['SUN','MON','TUE','WED','THU','FRI','SAT'];
+    let month=['JAN','FEB','MARCH','APRIL','MAY','JUN','JUL','AUG','SEPT','OCT','NOV','DEC'];
+
+    let m='AM';
+    let hours=date.getHours();
+    let minutes=date.getMinutes();
+    if(hours>11)
+        m='PM';
+    if(hours<10)
+        hours='0'+hours;
+    if(minutes<10)  
+        minutes='0'+minutes;
+    let x=`${day[date.getDay()]}|${month[date.getMonth()]}|${hours}:${minutes}${m}`;
+    document.querySelector(".date").innerHTML = x;
+</script>
+</body>
+</html>
