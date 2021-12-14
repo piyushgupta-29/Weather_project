@@ -21,14 +21,10 @@ const server=http.createServer((req,res)=>{
     if(req.url=='/')
     {
         let ans=replaceVal();
-        console.log(api_data.weather[0].main);
         res.writeHead(200,{'Content-type': 'text/html'});
         res.write(ans);
-        console.log('ans');
         res.end();
     }
-    else if(req.url=='/aboutus')
-        res.end('about us');
     else 
         res.end('error');
 });
